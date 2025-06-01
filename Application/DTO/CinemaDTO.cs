@@ -1,5 +1,4 @@
-﻿using Domain.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Application.DTO
 {
@@ -7,6 +6,6 @@ namespace Application.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Movie> Movies { get; set; }
+        public List<MovieDTO> Movies { get; set; }
     }
 }
