@@ -18,5 +18,10 @@
             PostalCode = postalCode;
             Country = country;
         }
+
+        public Address()
+        {
+
+        }
     }
 }

@@ -10,5 +10,10 @@
             Title = title;
             Description = description;
         }
+
+        public Movie()
+        {
+
+        }
     }
 }

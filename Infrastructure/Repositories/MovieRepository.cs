@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
+using Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,30 +9,30 @@ namespace Infrastructure.Repositories
 {
     public class MovieRepository : IMovieRepository
     {
-        private static readonly ISet<Movie> _movies = new HashSet<Movie>()
+        private readonly CinemaContext _context;
+
+        public MovieRepository(CinemaContext context)
         {
-            new Movie(1, DateTime.Now, 2, "Time", "Lorem ipsum"),
-            new Movie(2, new DateTime(2020, 10, 1), 2, "Shrek", "Lorem ipsum"),
-            new Movie(3, new DateTime(2021, 8, 1), 2, "Scooby Doo", "Lorem ipsum"),
-        };
+            _context = context;
+        }
 
         public IEnumerable<Movie> GetAll()
         {
-            return _movies;
+            return _context.Movie;
         }
 
         public Movie GetById(int id)
         {
-            return _movies.SingleOrDefault(x => x.Id == id);
+            return _context.Movie.SingleOrDefault(x => x.Id == id);
         }
 
         public Movie Add(Movie movie)
         {
-            movie.Id = _movies.Count + 1;
             movie.CreatedDate = DateTime.Now;
             movie.CreatedById = 1;
 
-            _movies.Add(movie);
+            _context.Movie.Add(movie);
+            _context.SaveChanges();
 
             return movie;
         }
@@ -40,11 +41,15 @@ namespace Infrastructure.Repositories
         {
             movie.ModifiedDate = DateTime.Now;
             movie.ModifiedById = 1;
+
+            _context.Movie.Update(movie);
+            _context.SaveChanges();
         }
 
         public void Delete(Movie movie)
         {
-            _movies.Remove(movie);
+            _context.Movie.Remove(movie);
+            _context.SaveChanges();
         }
     }
 }
