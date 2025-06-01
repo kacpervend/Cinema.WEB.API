@@ -1,7 +1,10 @@
 using Application.Mappings;
 using Application.Services;
 using Domain.Repositories;
+using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.API
 {
@@ -25,6 +28,8 @@ namespace Cinema.API
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContext<CinemaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Cinema")));
 
             // Add services to the container.
 

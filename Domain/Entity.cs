@@ -14,5 +14,10 @@
             CreatedDate = createdDate;
             CreatedById = createdById;
         }
+
+        public Entity()
+        {
+
+        }
     }
 }

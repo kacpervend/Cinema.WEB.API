@@ -12,5 +12,10 @@
             Movies = movies;
             Address = address;
         }
+
+        public Cinema()
+        {
+
+        }
     }
 }
