@@ -10,7 +10,7 @@ namespace Infrastructure.Repositories
     {
         private static readonly ISet<Address> _addresses = new HashSet<Address>()
         {
-            new Address(1, DateTime.Now, 2, "Cracow", "Warszawska", "15", "2", "30-501", "PL"),
+            new Address(1, DateTime.Now, 2, "Kraków", "Warszawska", "15", "2", "30-501", "PL"),
             new Address(2, new DateTime(2025, 1, 3), 2, "Kraków", "Wrocławska", "2", null, "30-541", "PL"),
             new Address(3, new DateTime(2025, 2, 8), 2, "Warszawa", "Krakowska", "20", "3", "10-302", "PL"),
         };

@@ -1,6 +1,6 @@
 @Cinema.API_HostAddress = http://localhost:5143
 
-GET {{Cinema.API_HostAddress}}/weatherforecast/
+GET {{Cinema.API_HostAddress}}/swagger/
 Accept: application/json
 
 ###

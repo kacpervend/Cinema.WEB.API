@@ -1,5 +1,6 @@
 ﻿using Application.DTO;
 using AutoMapper;
+using Domain.Entities;
 using Domain.Repositories;
 using System.Collections.Generic;
 
@@ -27,6 +28,31 @@ namespace Application.Services
         {
             var movie = _repository.GetById(id);
             return _mapper.Map<MovieDTO>(movie);
+        }
+
+        public MovieDTO Add(MovieDTO movieDTO)
+        {
+            var movie = _mapper.Map<Movie>(movieDTO);
+
+            _repository.Add(movie);
+
+            return movieDTO;
+        }
+
+        public MovieDTO Update(MovieDTO movieDTO)
+        {
+            var movie = _mapper.Map<Movie>(movieDTO);
+
+            _repository.Update(movie);
+
+            return movieDTO;
+        }
+
+        public void Delete(int id)
+        {
+            var movie = _repository.GetById(id);
+
+            _repository.Delete(movie);
         }
     }
 }
