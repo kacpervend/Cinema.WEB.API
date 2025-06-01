@@ -36,7 +36,7 @@ namespace Cinema.API.Controllers
         [HttpPost]
         public IActionResult Add([FromBody]CinemaDTO cinemaDTO)
         {
-            if (string.IsNullOrEmpty(cinemaDTO.Name) || !cinemaDTO.Movies.Any()) 
+            if (string.IsNullOrEmpty(cinemaDTO.Name) || !cinemaDTO.Movies.Any() || cinemaDTO.Address == null) 
             {
                 throw new Exception("Not all parameters were provided.");
             }

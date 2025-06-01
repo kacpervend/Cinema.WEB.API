@@ -36,9 +36,9 @@ namespace Cinema.API.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] MovieDTO movieDTO)
         {
-            if (string.IsNullOrEmpty(movieDTO.Title))
+            if (string.IsNullOrEmpty(movieDTO.Title) || string.IsNullOrEmpty(movieDTO.Description))
             {
-                throw new Exception("Parameter 'Title' was not provided.");
+                throw new Exception("Not all parameters were provided.");
             }
 
             _movieService.Add(movieDTO);
@@ -49,9 +49,9 @@ namespace Cinema.API.Controllers
         [HttpPut]
         public IActionResult Update([FromBody] MovieDTO movieDTO)
         {
-            if (string.IsNullOrEmpty(movieDTO.Title))
+            if (string.IsNullOrEmpty(movieDTO.Title) || string.IsNullOrEmpty(movieDTO.Description))
             {
-                throw new Exception("Parameter 'Title' was not provided.");
+                throw new Exception("Not all parameters were provided.");
             }
 
             _movieService.Update(movieDTO);
