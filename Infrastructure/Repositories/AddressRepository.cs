@@ -28,9 +28,6 @@ namespace Infrastructure.Repositories
 
         public Address Add(Address address)
         {
-            address.CreatedDate = DateTime.Now;
-            address.CreatedById = 1;
-
             _context.Address.Add(address);
             _context.SaveChanges();
 
@@ -39,9 +36,6 @@ namespace Infrastructure.Repositories
 
         public void Update(Address address)
         {
-            address.ModifiedDate = DateTime.Now;
-            address.ModifiedById = 1;
-
             _context.Address.Update(address);
             _context.SaveChanges();
         }

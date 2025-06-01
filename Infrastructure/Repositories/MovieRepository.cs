@@ -28,9 +28,6 @@ namespace Infrastructure.Repositories
 
         public Movie Add(Movie movie)
         {
-            movie.CreatedDate = DateTime.Now;
-            movie.CreatedById = 1;
-
             _context.Movie.Add(movie);
             _context.SaveChanges();
 
@@ -39,9 +36,6 @@ namespace Infrastructure.Repositories
 
         public void Update(Movie movie)
         {
-            movie.ModifiedDate = DateTime.Now;
-            movie.ModifiedById = 1;
-
             _context.Movie.Update(movie);
             _context.SaveChanges();
         }

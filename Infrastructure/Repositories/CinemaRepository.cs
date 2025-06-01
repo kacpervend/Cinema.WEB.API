@@ -29,9 +29,6 @@ namespace Infrastructure.Repositories
 
         public Cinema Add(Cinema cinema)
         {
-            cinema.CreatedDate = DateTime.Now;
-            cinema.CreatedById = 1;
-
             _context.Cinema.Add(cinema);
             _context.SaveChanges();
 
@@ -40,9 +37,6 @@ namespace Infrastructure.Repositories
 
         public void Update(Cinema cinema)
         {
-            cinema.ModifiedDate = DateTime.Now;
-            cinema.ModifiedById = 1;
-
             _context.Cinema.Update(cinema);
             _context.SaveChanges();
         }
