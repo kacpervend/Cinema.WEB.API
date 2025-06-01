@@ -3,7 +3,6 @@ using Application.Services;
 using Domain.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.API
@@ -48,7 +47,6 @@ namespace Cinema.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
