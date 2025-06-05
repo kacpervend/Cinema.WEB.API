@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Repositories;
 using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Infrastructure.Repositories
 
         public Address GetById(int id)
         {
-            return _context.Address.SingleOrDefault(x => x.Id == id);
+            return _context.Address.AsNoTracking().SingleOrDefault(x => x.Id == id);
         }
 
         public Address Add(Address address)

@@ -22,7 +22,7 @@ namespace Infrastructure.Data
         {
             var entries = ChangeTracker
                 .Entries()
-                .Where(x => x.Entity == typeof(Entity) && (x.State == EntityState.Added || x.State == EntityState.Modified));
+                .Where(x => x.Entity is Entity && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
             foreach (var entry in entries)
             {
