@@ -30,8 +30,10 @@ namespace Application.Services
             return _mapper.Map<MovieDTO>(movie);
         }
 
-        public MovieDTO Add(MovieDTO movieDTO)
+        public MovieDTO Add(CreateOrUpdateMovieDTO createMovieDTO)
         {
+            var movieDTO = _mapper.Map<MovieDTO>(createMovieDTO);
+
             var movie = _mapper.Map<Movie>(movieDTO);
 
             _repository.Add(movie);
@@ -39,13 +41,16 @@ namespace Application.Services
             return movieDTO;
         }
 
-        public MovieDTO Update(MovieDTO movieDTO)
+        public void Update(int id, CreateOrUpdateMovieDTO updateMovieDTO)
         {
+            var movieDTO = GetById(id);
+
+            movieDTO.Title = updateMovieDTO.Title;
+            movieDTO.Description = updateMovieDTO.Description;
+
             var movie = _mapper.Map<Movie>(movieDTO);
 
             _repository.Update(movie);
-
-            return movieDTO;
         }
 
         public void Delete(int id)

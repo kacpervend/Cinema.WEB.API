@@ -7,8 +7,8 @@ namespace Application.Services
     {
         IEnumerable<MovieDTO> GetAll();
         MovieDTO GetById(int id);
-        MovieDTO Add(MovieDTO movieDTO);
-        MovieDTO Update(MovieDTO movieDTO);
+        MovieDTO Add(CreateOrUpdateMovieDTO createMovieDTO);
+        void Update(int id, CreateOrUpdateMovieDTO updateMovieDTO);
         void Delete(int id);
     }
 }

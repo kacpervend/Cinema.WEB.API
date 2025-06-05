@@ -23,7 +23,7 @@ namespace Cinema.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get([FromRoute] int id)
         {
             var address = _addressService.GetById(id);
 
@@ -34,27 +34,22 @@ namespace Cinema.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] AddressDTO addressDTO)
+        public IActionResult Add([FromBody] CreateOrUpdateAddressDTO createAddressDTO)
         {
-            if (string.IsNullOrEmpty(addressDTO.City) || string.IsNullOrEmpty(addressDTO.Street) || string.IsNullOrEmpty(addressDTO.BuildingNumber) || string.IsNullOrEmpty(addressDTO.PostalCode))
-            {
-                throw new Exception("Not all parameters were provided.");
-            }
-
-            _addressService.Add(addressDTO);
+            _addressService.Add(createAddressDTO);
 
             return StatusCode(201);
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] AddressDTO addressDTO)
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] CreateOrUpdateAddressDTO updateAddressDTO, [FromRoute] int id)
         {
-            if (string.IsNullOrEmpty(addressDTO.City) || string.IsNullOrEmpty(addressDTO.Street) || string.IsNullOrEmpty(addressDTO.BuildingNumber) || string.IsNullOrEmpty(addressDTO.PostalCode))
-            {
-                throw new Exception("Not all parameters were provided.");
-            }
+            var address = _addressService.GetById(id);
 
-            _addressService.Update(addressDTO);
+            if (address == null)
+                return StatusCode(404);
+
+            _addressService.Update(id, updateAddressDTO);
 
             return StatusCode(204);
         }

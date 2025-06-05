@@ -23,7 +23,7 @@ namespace Cinema.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get([FromRoute] int id)
         {
             var cinema = _cinemaService.GetById(id);
 
@@ -34,27 +34,22 @@ namespace Cinema.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody]CinemaDTO cinemaDTO)
+        public IActionResult Add([FromBody] CreateOrUpdateCinemaDTO createCinemaDTO)
         {
-            if (string.IsNullOrEmpty(cinemaDTO.Name) || !cinemaDTO.Movies.Any() || cinemaDTO.Address == null) 
-            {
-                throw new Exception("Not all parameters were provided.");
-            }
-
-            _cinemaService.Add(cinemaDTO);
+            _cinemaService.Add(createCinemaDTO);
 
             return StatusCode(201);
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] CinemaDTO cinemaDTO)
+        [HttpPut("{id}")]
+        public IActionResult Update([FromBody] CreateOrUpdateCinemaDTO updateCinemaDTO, [FromRoute] int id)
         {
-            if (string.IsNullOrEmpty(cinemaDTO.Name))
-            {
-                throw new Exception("Parameter 'Name' was not provided.");
-            }
+            var cinema = _cinemaService.GetById(id);
 
-            _cinemaService.Update(cinemaDTO);
+            if (cinema == null)
+                return StatusCode(404);
+
+            _cinemaService.Update(id, updateCinemaDTO);
 
             return StatusCode(204);
         }

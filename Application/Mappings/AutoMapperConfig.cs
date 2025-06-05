@@ -13,10 +13,18 @@ namespace Application.Mappings
             {
                 config.CreateMap<Address, AddressDTO>();
                 config.CreateMap<AddressDTO, Address>();
+
                 config.CreateMap<Cinema, CinemaDTO>();
                 config.CreateMap<CinemaDTO, Cinema>();
+
                 config.CreateMap<Movie, MovieDTO>();
                 config.CreateMap<MovieDTO, Movie>();
+
+                config.CreateMap<CreateOrUpdateAddressDTO, AddressDTO>();
+
+                config.CreateMap<CreateOrUpdateCinemaDTO, CinemaDTO>();
+
+                config.CreateMap<CreateOrUpdateMovieDTO, MovieDTO>();
             })
             .CreateMapper();
         }

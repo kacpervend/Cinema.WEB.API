@@ -7,8 +7,8 @@ namespace Application.Services
     {
         IEnumerable<AddressDTO> GetAll();
         AddressDTO GetById(int id);
-        AddressDTO Add(AddressDTO cinemaDTO);
-        AddressDTO Update(AddressDTO cinemaDTO);
+        AddressDTO Add(CreateOrUpdateAddressDTO createAddressDTO);
+        void Update(int id, CreateOrUpdateAddressDTO updateAddressDTO);
         void Delete(int id);
     }
 }

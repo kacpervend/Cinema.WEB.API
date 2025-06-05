@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Application.DTO
 {
-    public class CinemaDTO
+    public class CreateOrUpdateCinemaDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public List<MovieDTO>? Movies { get; set; }
         public AddressDTO Address { get; set; }

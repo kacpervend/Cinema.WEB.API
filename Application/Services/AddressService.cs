@@ -30,8 +30,10 @@ namespace Application.Services
             return _mapper.Map<AddressDTO>(address);
         }
 
-        public AddressDTO Add(AddressDTO addressDTO)
+        public AddressDTO Add(CreateOrUpdateAddressDTO createAddressDTO)
         {
+            var addressDTO = _mapper.Map<AddressDTO>(createAddressDTO);
+
             var address = _mapper.Map<Address>(addressDTO);
 
             _repository.Add(address);
@@ -39,13 +41,20 @@ namespace Application.Services
             return addressDTO;
         }
 
-        public AddressDTO Update(AddressDTO addressDTO)
+        public void Update(int id, CreateOrUpdateAddressDTO updateAddressDTO)
         {
+            var addressDTO = GetById(id);
+            
+            addressDTO.City = updateAddressDTO.City;
+            addressDTO.Street = updateAddressDTO.Street;
+            addressDTO.BuildingNumber = updateAddressDTO.BuildingNumber;
+            addressDTO.ApartmentNumber = updateAddressDTO.ApartmentNumber;
+            addressDTO.PostalCode = updateAddressDTO.PostalCode;
+            addressDTO.Country = updateAddressDTO.Country;
+
             var address = _mapper.Map<Address>(addressDTO);
 
             _repository.Update(address);
-
-            return addressDTO;
         }
 
         public void Delete(int id)
