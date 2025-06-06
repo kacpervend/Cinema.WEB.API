@@ -36,6 +36,9 @@ namespace Cinema.API.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] CreateOrUpdateAddressDTO createAddressDTO)
         {
+            if (!ModelState.IsValid)
+                return StatusCode(400, ModelState);
+
             _addressService.Add(createAddressDTO);
 
             return StatusCode(201);
@@ -44,6 +47,9 @@ namespace Cinema.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Update([FromBody] CreateOrUpdateAddressDTO updateAddressDTO, [FromRoute] int id)
         {
+            if (!ModelState.IsValid)
+                return StatusCode(400, ModelState);
+
             var address = _addressService.GetById(id);
 
             if (address == null)

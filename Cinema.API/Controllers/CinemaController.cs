@@ -36,6 +36,9 @@ namespace Cinema.API.Controllers
         [HttpPost]
         public IActionResult Add([FromBody] CreateOrUpdateCinemaDTO createCinemaDTO)
         {
+            if (!ModelState.IsValid)
+                return StatusCode(400, ModelState);
+
             _cinemaService.Add(createCinemaDTO);
 
             return StatusCode(201);
@@ -44,6 +47,9 @@ namespace Cinema.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Update([FromBody] CreateOrUpdateCinemaDTO updateCinemaDTO, [FromRoute] int id)
         {
+            if (!ModelState.IsValid)
+                return StatusCode(400, ModelState);
+
             var cinema = _cinemaService.GetById(id);
 
             if (cinema == null)
