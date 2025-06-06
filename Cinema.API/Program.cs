@@ -1,5 +1,6 @@
 using Application.Mappings;
 using Application.Services;
+using Cinema.API.Middleware;
 using Domain.Repositories;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -32,6 +33,8 @@ namespace Cinema.API
 
             builder.Services.AddScoped<CinemaSeeder>();
 
+            builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -45,6 +48,8 @@ namespace Cinema.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
