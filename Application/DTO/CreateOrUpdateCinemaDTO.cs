@@ -9,8 +9,8 @@ namespace Application.DTO
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
-        public List<MovieDTO>? Movies { get; set; }
+        public List<CreateOrUpdateMovieDTO>? Movies { get; set; }
         [Required]
-        public AddressDTO Address { get; set; }
+        public CreateOrUpdateAddressDTO Address { get; set; }
     }
 }

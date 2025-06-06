@@ -6,7 +6,7 @@ namespace Application.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<MovieDTO>? Movies { get; set; }
-        public AddressDTO Address { get; set; }
+        public List<CreateOrUpdateMovieDTO>? Movies { get; set; }
+        public CreateOrUpdateAddressDTO Address { get; set; }
     }
 }
