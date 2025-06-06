@@ -30,6 +30,8 @@ namespace Cinema.API
 
             builder.Services.AddDbContext<CinemaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Cinema")));
 
+            builder.Services.AddScoped<CinemaSeeder>();
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -49,6 +51,12 @@ namespace Cinema.API
             app.UseAuthorization();
 
             app.MapControllers();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var seeder = scope.ServiceProvider.GetRequiredService<CinemaSeeder>();
+                seeder.Seed();
+            }
 
             app.Run();
         }
