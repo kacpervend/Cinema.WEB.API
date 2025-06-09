@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace Infrastructure.Data
     public class CinemaSeeder
     {
         private readonly CinemaContext _context;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public CinemaSeeder(CinemaContext context)
+        public CinemaSeeder(CinemaContext context, IPasswordHasher<User> passwordHasher)
         {
-            _context = context; 
+            _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         public void Seed()
@@ -51,6 +54,32 @@ namespace Infrastructure.Data
                     try
                     {
                         _context.Address.AddRange(GetAddresses());
+                        _context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"Failded to seed data into database. Reason: {ex.Message}");
+                    }
+                }
+
+                if (!_context.Role.Any())
+                {
+                    try
+                    {
+                        _context.Role.AddRange(GetRoles());
+                        _context.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception($"Failded to seed data into database. Reason: {ex.Message}");
+                    }
+                }
+
+                if (!_context.User.Any())
+                {
+                    try
+                    {
+                        _context.User.AddRange(GetUsers());
                         _context.SaveChanges();
                     }
                     catch (Exception ex)
@@ -168,6 +197,37 @@ namespace Infrastructure.Data
                     Country = "Polska"
                 }
             };
+        }
+
+        private IEnumerable<Role> GetRoles()
+        {
+            return new List<Role>()
+            {
+                new Role()
+                {
+                    Name = "admin"
+                },
+                new Role()
+                {
+                    Name = "manager"
+                },
+                new Role()
+                {
+                    Name = "user"
+                }
+            };
+        }
+
+        private IEnumerable<User> GetUsers()
+        {
+            var user = new User();
+
+            user.Login = "admin";
+            user.Password = _passwordHasher.HashPassword(user, "123456");
+            user.FirstName = "admin";
+            user.LastName = "admin";
+            user.Role = _context.Role.SingleOrDefault(x => x.Name == "admin");
+            return new List<User>() { user };
         }
     }
 }

@@ -20,11 +20,17 @@ namespace Application.Mappings
                 config.CreateMap<Movie, MovieDTO>();
                 config.CreateMap<MovieDTO, Movie>();
 
+                config.CreateMap<User, UserDTO>();
+                config.CreateMap<UserDTO, User>();
+
+                config.CreateMap<Role, RoleDTO>();
+                config.CreateMap<RoleDTO, Role>();
+
                 config.CreateMap<CreateOrUpdateAddressDTO, AddressDTO>();
-
                 config.CreateMap<CreateOrUpdateCinemaDTO, CinemaDTO>();
-
                 config.CreateMap<CreateOrUpdateMovieDTO, MovieDTO>();
+                config.CreateMap<CreateOrUpdateUserDTO, UserDTO>();
+                config.CreateMap<CreateOrUpdateRoleDTO, RoleDTO>();
             })
             .CreateMapper();
         }

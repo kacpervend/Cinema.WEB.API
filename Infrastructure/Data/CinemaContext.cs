@@ -12,6 +12,8 @@ namespace Infrastructure.Data
         public DbSet<Cinema> Cinema { get; set; }
         public DbSet<Movie> Movie { get; set; }
         public DbSet<Address> Address { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Role> Role { get; set; }
 
         public CinemaContext(DbContextOptions options) : base(options)
         {
